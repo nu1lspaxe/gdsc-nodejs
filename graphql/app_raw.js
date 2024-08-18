@@ -10,21 +10,24 @@ var usersRouter = require('./routes/users');
 var app = express();
 
 require('dotenv').config();
-const dbLink = process.env.MONGODB_URL;
+const dbLink = process.env.MONGODB_API;
 
-// Add dependency
 const mongoose = require('mongoose');
+const { graphqlHTTP } = require('express-graphql');
+const schema = require('./schema');
 
-// Connect to ODM with driver link
 mongoose.connect(dbLink, {
-  dbName: "sample_mflix",
+  // dbName: "sample_mflix",
 });
 
-const db = mongoose.connection;
-db.on('error', console.error.bind(console, 'MongoDB connection error:'));
-db.once('open', function () {
+mongoose.connection.once('open', () => {
   console.log('Connected to MongoDB');
 });
+
+app.use('/graphql', graphqlHTTP({
+  schema: schema,
+  graphiql: true 
+}));
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
