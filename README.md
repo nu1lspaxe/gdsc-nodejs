@@ -10,7 +10,6 @@ npm install
 #### API Protocol
 - rest
 - websocket
-- graphql
 
 #### Authentication
 - jwt-mongodb
