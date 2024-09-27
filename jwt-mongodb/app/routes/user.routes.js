@@ -21,8 +21,8 @@ module.exports = function(app) {
   );
 
   app.get(
-    "/api/test/admin",
-    [authJwt.verifyToken, authJwt.isAdmin],
-    controller.adminBoard
+    "/api/test/admin",  // route
+    [authJwt.verifyToken, authJwt.isAdmin], // middlewares
+    controller.adminBoard // controlelr
   );
 };

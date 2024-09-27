@@ -22,10 +22,6 @@ var corsOptions = {
   origin: "http://localhost:8081"
 };
 
-// routes
-require('./app/routes/auth.routes')(app);
-require('./app/routes/user.routes')(app);
-
 app.use(cors(corsOptions));
 
 // parse requests of content-type - application/json
@@ -38,6 +34,10 @@ app.use(express.urlencoded({ extended: true }));
 app.get("/", (req, res) => {
   res.json({ message: "Welcome to bezkoder application." });
 });
+
+// routes
+require('./app/routes/auth.routes')(app);
+require('./app/routes/user.routes')(app);
 
 // set port, listen for requests
 const PORT = process.env.PORT || 8080;
