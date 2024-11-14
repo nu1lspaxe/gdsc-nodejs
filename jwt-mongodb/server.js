@@ -7,8 +7,13 @@ const db = require("./app/models");
 const Role = db.role;
 // const dbConfig = require("./app/config/db.config")
 
+
+require('dotenv').config();
+const dbLink = process.env.MONGODB_URL;
+
 db.mongoose
-  .connect(`mongodb://localhost:27017/test`)
+  // .connect(`mongodb://localhost:27017/test`)
+  .connect(dbLink)
   .then(() => {
     console.log("Successfully connect to MongoDB.");
   })
